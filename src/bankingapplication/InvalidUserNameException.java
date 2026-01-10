@@ -1,6 +1,6 @@
 package bankingapplication;
 
-public class InvalidUserNameException extends Exception{
+public class InvalidUserNameException extends RuntimeException{
     public InvalidUserNameException(String message){
         super(message);
     }

@@ -21,24 +21,17 @@ public static void main(String[] args) {
 
     user.createAccount(new Account("Idoko favour",phoneNum2));
 
-    try {
         user.depositMoney("Idoko favour",400);
-    } catch (InvalidUserNameException e) {
         System.out.println("the user does not exist");
-    }
 
 
-    try {
         user.withdrawMoney("Samuel Benjamin",200);
-    } catch (InvalidUserNameException e) {
         System.out.println("insufficient fund");
-    }
 
 
-    try {
+
         System.out.println(user.accountBalance("bryan favour"));
-    } catch (InvalidUserNameException e) {
         System.out.println("invalid user name");
-    }
+
     System.out.println(user.viewAccount());
 }

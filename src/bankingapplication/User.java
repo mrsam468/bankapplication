@@ -19,7 +19,7 @@ public class User {
 
 //    depositMoneyToAccount
 
-    public void depositMoney(String userName,int amount) throws InvalidUserNameException{
+    public void depositMoney(String userName,int amount){
        if(!accountMemory.containsKey(userName)){
            throw new InvalidUserNameException("the username you entered does not exist");
        }else{
@@ -49,7 +49,7 @@ public class User {
     }
 
 //    check account balance
-    public int accountBalance(String userName) throws InvalidUserNameException {
+    public int accountBalance(String userName)  {
         if(!accountMemory.containsKey(userName)){
             throw new InvalidUserNameException("account does not exist");
         }else {
@@ -57,8 +57,8 @@ public class User {
             return account.getAccountBalance();
         }
     }
-    public Map<String, Account> viewAccount(){
-        return accountMemory;
-    }
+//    public Map<String, Account> viewAccount(){
+//        return accountMemory;
+//    }
 
 }
