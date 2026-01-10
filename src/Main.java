@@ -26,12 +26,10 @@ public static void main(String[] args) {
 
 
         user.withdrawMoney("Samuel Benjamin",200);
-        System.out.println("insufficient fund");
 
 
 
         System.out.println(user.accountBalance("bryan favour"));
-        System.out.println("invalid user name");
 
-    System.out.println(user.viewAccount());
+//    System.out.println(user.viewAccount());
 }

@@ -57,7 +57,7 @@ public class User {
             return account.getAccountBalance();
         }
     }
-//    public Map<String, Account> viewAccount(){
+//    public Map<String, Account> viewAccounts(){
 //        return accountMemory;
 //    }
 
