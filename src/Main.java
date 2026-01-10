@@ -1,5 +1,4 @@
 import bankingapplication.Account;
-import bankingapplication.InvalidUserNameException;
 import bankingapplication.User;
 
 public static void main(String[] args) {
