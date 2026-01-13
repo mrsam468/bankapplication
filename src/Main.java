@@ -1,34 +1,13 @@
-import bankingapplication.Account;
 import bankingapplication.User;
 
-public static void main(String[] args) {
-    User user = new User();
-
-    Scanner sc = new Scanner(System.in);
-
-    System.out.println("enter phone number");
-
-    long phoneNum = sc.nextLong();
-
-    user.createAccount(new Account("Samuel Benjamin",phoneNum));
-
-    System.out.println("enter your phone number");
-
-    long phoneNum2 = sc.nextLong();
-
-    sc.close();
-
-    user.createAccount(new Account("Idoko favour",phoneNum2));
-
-        user.depositMoney("Idoko favour",400);
-        System.out.println("the user does not exist");
-
-
-        user.withdrawMoney("Samuel Benjamin",200);
-
-
-
-        System.out.println(user.accountBalance("bryan favour"));
-
-//    System.out.println(user.viewAccount());
+public class Main{
+    public static void main(String[] args){
+        User user = new User();
+        user.createAccount("Benjamin" , "Samuel","08107908359");
+        user.createAccount("Idoko","favour","08107908358");
+        user.deposit("8107908359",200);
+        user.withdraw("8107908359",100);
+        System.out.println(user.balance("8107908359"));
+        System.out.println(user.viewAccount());
+    }
 }

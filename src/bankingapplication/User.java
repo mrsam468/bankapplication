@@ -1,64 +1,78 @@
 package bankingapplication;
 
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class User {
-    private static Map<String,Account> accountMemory = new HashMap<>();
+   private String surName;
+    private String lastName;
+    private String userName;
+    private String phoneNumber;
+    private static Map<String,Account> accountMap = new HashMap<>();
 
-//    createAccount
-    public void createAccount(Account account){
-        accountMemory.put(account.getUserName(),account);
-    }
-//    public void createAccounts(List<Account> account){
-//
-//    }
+    public void createAccount(String firstName,String lastName, String phoneNumber){
 
+        if(phoneNumber.length() < 11){
+            throw new InvalidPhoneNumberException("the number you are trying to enter is invalid ");
+        }
 
-//    depositMoneyToAccount
+        this.surName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.userName = firstName + " " + lastName;
 
-    public void depositMoney(String userName,int amount){
-       if(!accountMemory.containsKey(userName)){
-           throw new InvalidUserNameException("the username you entered does not exist");
-       }else{
-           Account account =  accountMemory.get(userName);
-           try {
-               account.credit(amount);
-           } catch (AmountIsNotValidException e) {
-               e.getStackTrace();
-           }
-       }
-    }
-
-
-//    withdrawMoneyFromAccount
-
-    public void withdrawMoney(String userName , int amount) throws InvalidUserNameException {
-        if(!accountMemory.containsKey(userName)){
-            throw new InvalidUserNameException("the name you have entered does not exist");
-        }else{
-            Account account = accountMemory.get(userName);
-            try {
-                account.debit(amount);
-            } catch (InsufficientFundException e) {
-                System.out.println("you do not have such money in your account");
+        for(Account value : accountMap.values()){
+            if(Objects.equals(value.getAccountNumber(), phoneNumber.substring(1))){
+                throw new PhoneNumberAlreadyExistException("the number you are trying to use have already been taken");
             }
         }
+
+        accountMap.put(this.userName,new Account(phoneNumber));
     }
 
-//    check account balance
-    public int accountBalance(String userName)  {
-        if(!accountMemory.containsKey(userName)){
-            throw new InvalidUserNameException("account does not exist");
-        }else {
-            Account account = accountMemory.get(userName);
-            return account.getAccountBalance();
+    public void withdraw(String accountNumber,double amount){
+        boolean conditionMet = false;
+        for (Account accounts : accountMap.values()){
+
+            if(Objects.equals(accounts.getAccountNumber(), accountNumber)){
+                accounts.debit(amount);
+                conditionMet = true;
+            }
+
+        }
+
+        if (!conditionMet) {
+            throw new NoAccountFoundException("you do not have an account");
         }
     }
-//    public Map<String, Account> viewAccounts(){
-//        return accountMemory;
-//    }
 
+    public void deposit(String accountNumber,double amount){
+        boolean conditionMet = false;
+        for (Account accounts : accountMap.values()){
+
+            if(Objects.equals(accounts.getAccountNumber(), accountNumber)){
+                accounts.credit(amount);
+                conditionMet = true;
+            }
+
+        }
+
+        if (!conditionMet) {
+            throw new NoAccountFoundException("you do not have an account");
+        }
+    }
+
+    public double balance(String accountNumber){
+        for(Account account : accountMap.values()){
+            if (Objects.equals(account.getAccountNumber(), accountNumber)){
+                return account.getAccountBalance();
+            }
+        }
+        return 0;
+    }
+
+    public Map<String,Account> viewAccount(){
+        return accountMap;
+    }
 }
