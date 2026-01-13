@@ -9,7 +9,7 @@ public class User {
     private String lastName;
     private String userName;
     private String phoneNumber;
-    private static Map<String,Account> accountMap = new HashMap<>();
+    private static final Map<String,Account> accountMap = new HashMap<>();
 
     public void createAccount(String firstName,String lastName, String phoneNumber){
 
