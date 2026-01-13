@@ -11,7 +11,7 @@ public class User {
     private String phoneNumber;
     private static Map<String,Account> accountMap = new HashMap<>();
 
-    public void createAccount(String surName,String lastName, String phoneNumber){
+    public void createAccount(String surName,String lastName, String phoneNumber,String userName){
 
         if(phoneNumber.length() < 11){
             throw new InvalidPhoneNumberException("the number you are trying to enter is invalid ");
@@ -20,8 +20,12 @@ public class User {
         this.surName = surName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
-        this.userName = this.surName + " " + this.lastName;
 
+        if (accountMap.containsKey(userName)){
+            throw new UserNameAlreadyTakenException("the name you are trying to enter have already been taken");
+        }else{
+            this.userName = userName;
+        }
         for(Account value : accountMap.values()){
             if(Objects.equals(value.getAccountNumber(), phoneNumber.substring(1))){
                 throw new PhoneNumberAlreadyExistException("the number you are trying to use have already been taken");
