@@ -24,7 +24,7 @@ public class User {
 
         for(Account value : accountMap.values()){
             if(Objects.equals(value.getAccountNumber(), phoneNumber.substring(1))){
-                throw new PhoneNumberAlreadyExistException("the number you are trying to use have already been taken");
+                throw new PhoneNumberAlreadyExistException("the number you are trying to use have already been used");
             }
         }
 
