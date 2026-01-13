@@ -6,7 +6,7 @@ public class Main{
 
         user.createAccount("Benjamin" , "Samuel","08107908359");
 
-        user.createAccount("Idoko","favour","08107908358");
+        user.createAccount("idoko","favour","08107908358");
 
         user.deposit("8107908359",200);
 

@@ -9,22 +9,22 @@ public class User {
     private String lastName;
     private String userName;
     private String phoneNumber;
-    private static final Map<String,Account> accountMap = new HashMap<>();
+    private static Map<String,Account> accountMap = new HashMap<>();
 
-    public void createAccount(String firstName,String lastName, String phoneNumber){
+    public void createAccount(String surName,String lastName, String phoneNumber){
 
         if(phoneNumber.length() < 11){
             throw new InvalidPhoneNumberException("the number you are trying to enter is invalid ");
         }
 
-        this.surName = firstName;
+        this.surName = surName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
-        this.userName = firstName + " " + lastName;
+        this.userName = this.surName + " " + this.lastName;
 
         for(Account value : accountMap.values()){
             if(Objects.equals(value.getAccountNumber(), phoneNumber.substring(1))){
-                throw new PhoneNumberAlreadyExistException("the number you are trying to use have already been used");
+                throw new PhoneNumberAlreadyExistException("the number you are trying to use have already been taken");
             }
         }
 
