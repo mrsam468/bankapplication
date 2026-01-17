@@ -4,6 +4,8 @@ package bankingapplication;
 import javax.naming.InvalidNameException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BankManager {
     private Map<String,User> userStorage = new HashMap<>();
@@ -46,9 +48,13 @@ public class BankManager {
         if (phoneNumber.length() < 11){
             throw new InvalidPhoneNumberException("the length of the phone number is not complete");
         }
-//        if (phoneNumber.contains(char)) {
-//            Learn about regex and use the knowledge to write this section
-//        }
+
+        Pattern pattern = Pattern.compile("//d//d//d//d//d//d//d//d//d//d//d");
+        Matcher matcher = pattern.matcher(phoneNumber);
+        boolean phoneNumberCorrect = matcher.find();
+        if (!phoneNumberCorrect){
+            throw new InvalidPhoneNumberException("this is an invalid phone number");
+        }
         return new Account(phoneNumber);
     }
 
