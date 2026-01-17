@@ -1,82 +1,44 @@
 package bankingapplication;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 public class User {
    private String surName;
-    private String lastName;
-    private String userName;
-    private String phoneNumber;
-    private static Map<String,Account> accountMap = new HashMap<>();
+   private String firstName;
+   private String userName;
+   private String phoneNumber;
+   private Account account;
 
-    public void createAccount(String surName,String lastName, String phoneNumber,String userName){
+   public User(String firstName,String surName,String userName,String phoneNumber,Account account){
+       this.surName = surName;
+       this.firstName = firstName;
+       this.phoneNumber = phoneNumber;
+       this.userName = userName;
+       this.account = account;
+   }
 
-        if(phoneNumber.length() < 11){
-            throw new InvalidPhoneNumberException("the number you are trying to enter is invalid ");
-        }
+   public String getsurName(){
+       return surName;
+   }
 
-        this.surName = surName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
+   public String getFirstName(){
+       return firstName;
+   }
 
-        if (accountMap.containsKey(userName)){
-            throw new UserNameAlreadyTakenException("the name you are trying to enter have already been taken");
-        }else{
-            this.userName = userName;
-        }
-        for(Account value : accountMap.values()){
-            if(Objects.equals(value.getAccountNumber(), phoneNumber.substring(1))){
-                throw new PhoneNumberAlreadyExistException("the number you are trying to use have already been taken");
-            }
-        }
-
-        accountMap.put(this.userName,new Account(phoneNumber));
+   public String accountNumber(){
+       return account.getAccountNumber();
+   }
+    public void withdraw(double amount){
+       this.account.debit(amount);
     }
 
-    public void withdraw(String accountNumber,double amount){
-        boolean conditionMet = false;
-        for (Account accounts : accountMap.values()){
-
-            if(Objects.equals(accounts.getAccountNumber(), accountNumber)){
-                accounts.debit(amount);
-                conditionMet = true;
-            }
-
-        }
-
-        if (!conditionMet) {
-            throw new NoAccountFoundException("you do not have an account");
-        }
+    public void deposit(double amount){
+        this.account.credit(amount);
     }
 
-    public void deposit(String accountNumber,double amount){
-        boolean conditionMet = false;
-        for (Account accounts : accountMap.values()){
-
-            if(Objects.equals(accounts.getAccountNumber(), accountNumber)){
-                accounts.credit(amount);
-                conditionMet = true;
-            }
-
-        }
-
-        if (!conditionMet) {
-            throw new NoAccountFoundException("you do not have an account");
-        }
+    public double balance(){
+       return this.account.getAccountBalance();
     }
 
-    public double balance(String accountNumber){
-        for(Account account : accountMap.values()){
-            if (Objects.equals(account.getAccountNumber(), accountNumber)){
-                return account.getAccountBalance();
-            }
-        }
-        return 0;
-    }
-
-    public Map<String,Account> viewAccount(){
-        return accountMap;
-    }
 }
