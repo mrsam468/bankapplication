@@ -2,6 +2,8 @@ package bankingapplication;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BankManager {
     private Map<String,User> userStorage = new HashMap<>();
@@ -33,6 +35,15 @@ public class BankManager {
             user.withdraw(amount);
         }else {
             throw new InvalidnameException("the name you have entered is invalid");
+        }
+
+        String userFullName = user.getsurName() + " " + user.getFirstName();
+        Pattern pattern = Pattern.compile(fullName,Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(userFullName);
+        boolean found = matcher.find();
+        if (found){
+            user.withdraw(amount);
+
         }
     }
 
