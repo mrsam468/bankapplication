@@ -2,6 +2,7 @@ package bankingapplication;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,20 +32,21 @@ public class BankManager {
     public void withdrawFromAccount(String fullName,String accountNumber,double amount){
         String userName = accountInfo.get(accountNumber);
         User user  = userStorage.get(userName);
-        if (Boolean.parseBoolean(user.getsurName() + " " + user.getFirstName().equals(fullName)) || Boolean.parseBoolean(user.getFirstName() + " " + user.getsurName().equals(fullName))){
-            user.withdraw(amount);
-        }else {
-            throw new InvalidnameException("the name you have entered is invalid");
-        }
-
         String userFullName = user.getsurName() + " " + user.getFirstName();
+        String userNameReverse = user.getFirstName() + " " + user.getsurName();
         Pattern pattern = Pattern.compile(fullName,Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(userFullName);
         boolean found = matcher.find();
-        if (found){
+        if (fullName.equals(userFullName) || fullName.equals(userNameReverse)){
+            user.withdraw(amount);
+        }else if (found){
             user.withdraw(amount);
 
+        } else {
+            throw new InvalidnameException("the name you have entered is invalid");
         }
+
+
     }
 
     public double accountBalance (String userName){
