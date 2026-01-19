@@ -1,4 +1,4 @@
-package bankingapplication;
+package exeptions;
 
 public class InvalidPhoneNumberException extends RuntimeException{
     public InvalidPhoneNumberException(String message){

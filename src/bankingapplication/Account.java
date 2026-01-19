@@ -1,5 +1,7 @@
 package bankingapplication;
 
+import exeptions.InsufficientFundException;
+
 public class Account {
     double accountBalance = 0;
     private final String accountNumber;

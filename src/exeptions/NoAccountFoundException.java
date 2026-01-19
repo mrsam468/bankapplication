@@ -1,4 +1,4 @@
-package bankingapplication;
+package exeptions;
 
 public class NoAccountFoundException extends RuntimeException{
     public NoAccountFoundException(String message){

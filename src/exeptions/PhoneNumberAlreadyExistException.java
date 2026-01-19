@@ -1,4 +1,4 @@
-package bankingapplication;
+package exeptions;
 
 public class PhoneNumberAlreadyExistException extends RuntimeException{
     public PhoneNumberAlreadyExistException(String message){
